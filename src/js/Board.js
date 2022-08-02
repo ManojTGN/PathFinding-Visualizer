@@ -1,11 +1,17 @@
 
+var BOX_SIZE = 25;
+
 function BuildBoard(){
     var BOARD = document.getElementById("board");
-    var height = $(window).height();
-    var width = $(window).width();
+    var width = ($(window).width()/BOX_SIZE) - 1;
+    var height = ($(window).height()/BOX_SIZE) - 5;
 
     var tmpBoard = '';
-    for(var j = 0; j < (width/25);j++) tmpBoard+='<td></td>';
-    for( var i = 0; i < (height/25);i++) $('#board').append( '<tr>'+tmpBoard+'</tr>' );
+    for(var i = 0; i < width; i++) tmpBoard+='<td></td>';
+    for( var i = 0; i < height; i++) $('#board').append( '<tr>'+tmpBoard+'</tr>' );
     
 }
+
+$(window).resize(function() {
+    //BuildBoard();
+});

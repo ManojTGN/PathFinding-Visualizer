@@ -13,39 +13,58 @@
     <body onload="BuildBoard()">
 
     <table id="board"></table>
-    
-    <div class="card" id="mainCard">
-        <div class="collapse" id="collapseMainCard">
-            <div class="card card-body">
-                <div>
-                    <button type="button" class="btn btn-light"><i class="bi bi-car-front"></i> Not Placed</button>
-                    <button type="button" class="btn btn-light"><i class="bi bi-flag"></i> Not Placed</button>
-                    <div class="vr"></div>
-                    <button type="button" class="btn btn-light"><i class="bi bi-pin"></i> Add Checkpoint</button>
-                </div>
+
+    <div class="toast align-items-center" id="liveToast" role="alert" style="position: absolute;top:1%;left:1%;" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body"> 
+                <p id="toastHeader"></p>
+                <div class="mt-2 pt-2 border-top">
+                    <button type="button" class="btn btn-primary btn-sm" id="toastStart" data-bs-dismiss="toast" aria-label="Close"><i class="bi bi-car-front"></i></button>
+                    <button type="button" class="btn btn-primary btn-sm" id="toastEnd" data-bs-dismiss="toast" aria-label="Close"><i class="bi bi-flag"></i></button><!--data-bs-dismiss="toast"-->
+                    <button type="button" class="btn btn-primary btn-sm" id="toastCheckpoint" data-bs-dismiss="toast" aria-label="Close"><i class="bi bi-pin"></i></button>
+                  </div>
             </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
+    </div>
+
+    <div class="card" id="mainCard">
         <div class="card-body">
-            <button type="button" class="btn btn-light" data-bs-toggle="collapse" href="#collapseMainCard" role="button" aria-expanded="false" aria-controls="collapseMainCard" onclick="toggleToolBar()" ><i class="bi bi-chevron-up"></i></button>
-            
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-light" onclick="OptionHandler('START')"><i class="bi bi-car-front"></i></button>
+                <button type="button" class="btn btn-light" onclick="OptionHandler('START')" id="display_start">Not Placed</button>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-light" onclick="OptionHandler('CHECKPOINT')"><i class="bi bi-pin"></i></button>
+                <button type="button" class="btn btn-light" onclick="OptionHandler('CHECKPOINT')" id="display_checkpoint">Add Checkpoint</button>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-light" onclick="OptionHandler('END')"><i class="bi bi-flag"></i></button>
+                <button type="button" class="btn btn-light" onclick="OptionHandler('END')" id="display_end">Not Placed</button>
+            </div>
+            <div class="vr"></div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-light" onclick="ClearBoardItems('ALL')"><i class="bi bi-x-lg"></i></button>
+                <button type="button" class="btn btn-light" onclick="ClearBoardItems('ALL')" id="display_end">Clear All</button>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-light" onclick="ClearBoardItems('CHECKPOINT')"><i class="bi bi-x-square"></i></button>
+                <button type="button" class="btn btn-light" onclick="ClearBoardItems('CHECKPOINT')" id="display_end">Clear Checkpoints</button>
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted"><hr></h6>
             <div class="btn-group dropup">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-braces-asterisk"></i> Algorithm</button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">A* Algorithm</a></li>
+                    <li><a class="dropdown-item" href="#">Random Walk</a></li>
+                    <li><a class="dropdown-item" href="#">Minimum Spanning Tree</a></li>
+                    <li><a class="dropdown-item" href="#">Single Source Shortest Path</a></li>
+                    <li><a class="dropdown-item" href="#">All-Pairs Shortest Path</a></li>
+
                 </ul>
             </div>
-
             <button type="button" class="btn btn-primary" ><i class="bi bi-eye"></i> Visualize</button>
         </div>
     </div>
-    <script>
-        var TOOL_BAR_TOGGLE = false;
-        function toggleToolBar(){
-            if(TOOL_BAR_TOGGLE == true) $("#mainCard").css("top","72%");
-            else $("#mainCard").css("top","60%");
-
-            TOOL_BAR_TOGGLE = true ? TOOL_BAR_TOGGLE==false : false;
-        };
-    </script>
     </body>
 </html>

@@ -1,4 +1,5 @@
 
+var IsVisualizing = false;
 var BOX_SIZE = 45;
 
 var START = null;
@@ -13,6 +14,8 @@ function OptionHandler(option){
 }
 
 function ClearBoardItems(toClear="ALL"){
+    if(IsVisualizing) return;
+
     if(toClear == "ALL"){
         if(START != null) document.getElementById(START[0]+'_'+START[1]).innerHTML = '';
         if(END != null) document.getElementById(END[0]+'_'+END[1]).innerHTML = '';
@@ -21,6 +24,13 @@ function ClearBoardItems(toClear="ALL"){
         }
 
         START = null;END = null;CHECKPOINTS = [];OPTION_SELECTED = null;
+        DetailUpdater();
+        return;
+    }else if(toClear == "CHECKPOINT"){
+        for(var i = 0; i < CHECKPOINTS.length; i++){
+            document.getElementById(CHECKPOINTS[i][0]+'_'+CHECKPOINTS[i][1]).innerHTML = '';
+        }
+        CHECKPOINTS = [];OPTION_SELECTED = null;
         DetailUpdater();
         return;
     }
@@ -65,6 +75,7 @@ function BuildBoard(){
 }
 
 function ClickHandler(row,column){ 
+    if(IsVisualizing) return;
 
     if(OPTION_SELECTED == "START"){
         if(START != null && START[0] == row && START[1] == column){
